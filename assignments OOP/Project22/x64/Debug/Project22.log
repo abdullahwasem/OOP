@@ -1,0 +1,11 @@
+﻿  Source.cpp
+C:\Users\FRANK O TECH\source\repos\Project22\Project22\Source.cpp(412,13): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\FRANK O TECH\source\repos\Project22\Project22\Source.cpp(422,16): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\FRANK O TECH\source\repos\Project22\Project22\Source.cpp(425,61): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\FRANK O TECH\source\repos\Project22\Project22\Source.cpp(425,50): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+C:\Users\FRANK O TECH\source\repos\Project22\Project22\Source.cpp(425,44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Users\FRANK O TECH\source\repos\Project22\Project22\Source.cpp(579,23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\FRANK O TECH\source\repos\Project22\Project22\Source.cpp(579,41): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\FRANK O TECH\source\repos\Project22\Project22\Source.cpp(637,23): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\FRANK O TECH\source\repos\Project22\Project22\Source.cpp(637,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Project22.vcxproj -> C:\Users\FRANK O TECH\source\repos\Project22\x64\Debug\Project22.exe

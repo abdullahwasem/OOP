@@ -1,0 +1,1128 @@
+
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+//QUESTION 1
+class VectorType
+{
+private:
+	//necessary variables of pointers type
+
+	double* x; double* y; double* z;
+
+public:
+	//COMPARISON OPERATOR
+	friend bool operator ==(const VectorType& c, const VectorType& v);
+	//NOT EQUAL TO OPERATOR 
+	friend bool operator != (const VectorType& c, const VectorType& v);
+	//OUTPUT OPERATOR
+	friend ostream& operator<<(ostream& print, const VectorType& c);
+	//INPUT OPERATOR
+	friend istream& operator>>(istream& enter, const VectorType& c);
+
+	//default and overloaded constructor 
+
+	VectorType(double a = 0, double b = 0, double c = 0)
+	{
+		x = new double;
+		*x = a;
+		y = new double;
+		*y = b;
+		z = new double;
+		*z = c;
+	}
+
+	//copy constructor 
+	VectorType(const VectorType& V)
+	{
+		//cout << "copy constructor called \n"; 
+		x = V.x;
+		y = V.y;
+		z = V.z;
+	}
+
+	// setter  for value 
+	void setter(double  q, double  w, double  e)
+	{
+		//cout << *x << " " << *y << " " << *z << endl;
+
+		*x = q;
+		*y = w;
+		*z = e;
+
+	}
+	void getter(double& q, double& w, double& e)
+	{
+		//cout << *x << " " << *y << " " << *z << endl; 
+
+		q = *x;
+		w = *y;
+		e = *z;
+
+	}
+
+	//destructor 
+	/*~VectorType()
+	{
+		cout << "destructor called ";
+		delete x;
+		delete y;
+		delete z;
+
+		}*/
+
+		//overloaded assignment operator 
+	VectorType operator = (const VectorType& c)
+	{
+		x = c.x;
+		y = c.y;
+		z = c.z;
+		return *this;
+	}
+
+	// overloading * for dotprod 
+	double operator * (VectorType& c)
+	{
+		cout << *x << " " << *y << " " << *z << endl;
+		cout << *(c.x) << " " << *(c.y) << " " << *(c.z) << endl;
+		//cout <<* x << *y << *z << endl;
+
+
+		double prod;
+		prod = ((*x) * (*c.x)) + ((*y) * (*c.y)) + ((*z) * (*c.z));
+		cout << "/t/t/t YOUR dot product  IS " << prod << endl;
+		return prod;
+
+	}
+
+	//length of vectors
+	double lenvec()
+	{
+		double len;
+
+		len = sqrt((*x * *x) + (*y * *y) + (*z * *z));
+		cout << "\t\t\t YOUR LENGTH IS " << len << endl;
+		return len;
+
+
+	}
+
+	//angel between vectors
+	VectorType anglevec(VectorType& c, double l1, double l2, double p)
+	{
+
+		double ang;
+
+		ang = (p / (l1 * l2));
+		if (ang >= -1 && ang <= 1)
+
+		{
+			cout << "\t\t\t YOUR ANGLE IS " << acos(ang) << endl;
+		}
+		else { cout << "\t\t\t YOUR ANGLE IS " << "0" << endl; }
+		return *this;
+	}
+
+	//add and sub overloading 
+	VectorType operator + (VectorType& c)
+
+	{
+
+
+		cout << "the sum of both vectors is \n";
+		double l = 0, p = 0, j = 0;
+		l = *x + *c.x;
+		p = *y + *c.y;
+		j = *z + *c.z;
+		cout << l << "i" << " " << p << "j" << " " << j << "k" << endl;
+		return *this;
+	}
+
+	VectorType operator - (VectorType& c)
+	{
+		double l, p, j;
+		cout << "the subtraction of both vectors is \n";
+		l = *x - *c.x;
+		p = *y - *c.y;
+		j = *z - *c.z;
+		cout << l << "i" << " " << p << "j" << " " << j << "k" << endl;
+		return *this;
+	}
+
+	//pre  increament and decrement 
+	VectorType& operator ++()
+	{
+		cout << *x << " " << *y << " " << *z << endl;
+
+		cout << "pre increment called \n";
+
+		++(*x);
+
+		++(*y);
+		++(*z);
+		cout << *x << endl << *y << endl << *z << endl;
+		return *this;
+	}
+
+	VectorType operator --()
+	{
+		cout << *x << " " << *y << " " << *z << endl;
+
+		cout << "pre decrement called \n";
+		--(*x);
+		--(*y);
+		--(*z);
+		cout << *x << endl << *y << endl << *z << endl;
+		return *this;
+	}
+
+	//post increment and decrement 
+	VectorType operator ++(int)
+	{
+		cout << *x << " " << *y << " " << *z << endl;
+		cout << "post increment called \n";
+		(*x)++;
+		(*y)++;
+		(*z)++;
+		cout << *x << endl << *y << endl << *z << endl;
+		return *this;
+	}
+
+	VectorType operator --(int)
+	{
+		cout << *x << " " << *y << " " << *z << endl;
+		cout << "post decrement called \n";
+		(*x)--;
+		(*y)--;
+		(*z)--;
+		cout << *x << endl << *y << endl << *z << endl;
+		return *this;
+	}
+
+
+
+	void input(double& a, double& s, double& d)
+	{
+
+		cin >> a;
+
+		cout << endl;
+		cin >> s;
+
+		cout << endl;
+		cin >> d;
+
+		cout << endl;
+	}
+
+
+};
+
+bool operator == (const VectorType& c, const VectorType& v)
+
+{
+	if (*(c.x) == *(v.x))
+	{
+		if (*(c.y) == *(v.y))
+		{
+			if (*(c.z) == *(v.z))
+			{
+				cout << " EQUAL vectors !!!!\n";
+				return 1;
+			}
+		}
+	}
+	else {
+		cout << "NOT EQUAL vectors  \n";
+		return 0;
+	}
+}
+
+bool operator != (const VectorType& c, const VectorType& v)
+{
+	if (*(c.x) != *(v.x))
+	{
+		if (*(c.y) != *(v.y))
+		{
+			if (*(c.z) != *(v.z))
+			{
+				cout << "EXACTLY NOT EQUAL BRO !!!!\n";
+				return 1;
+			}
+		}
+	}
+	else {
+
+		return 0;
+	}
+
+}
+
+ostream& operator<<(ostream& print, const VectorType& c)
+{
+
+	print << "i : " << *(c.x) << " ";
+	print << " j : " << *(c.y) << " ";
+	print << " k : " << *(c.z) << " " << endl;
+	return print;
+}
+
+istream& operator >>(istream& enter, const VectorType& c)
+{
+
+	enter >> *(c.x);
+	enter >> *(c.y);
+	enter >> *(c.z);
+
+	return enter;
+}
+
+/*SEPERATOR-
+   QUESTION 2
+----------------------------------------
+----------------------------------------
+----------------------------------------
+----------------------------------------
+----------------------------------------
+*/
+
+class astaad
+{
+
+	int size;
+	char* s;
+
+public:
+	astaad(char uu[], int kk)
+	{
+		size = kk;
+		s = new char[size];
+		/*cout << "input your string \n"; */
+		for (int i = 0; i < size; i++)
+		{
+			s[i] = uu[i];
+		}
+
+	}
+	//setter
+
+	void set(char* x, int z)
+	{
+
+		s = x;
+		size = z;
+	}
+	//getter
+
+	void get(char*& x, int& z)
+	{
+
+		x = s;
+		z = size;
+	}
+	//getting length of the char array
+
+	int getsize()
+	{
+
+		int y = 1;
+		y = strlen(s);
+		
+
+		cout << "the length of your string is = " << y << endl;
+		return y;
+	}
+
+	//upper case function
+	void upper(int y)
+	{
+		char* p;
+		p = new char[y];
+		int  i = 32;
+		for (int j = 0; j <= y; j++)
+		{
+			p[j] = s[j];
+
+		}
+		for (int j = 0; j <= y; j++)
+		{
+			if (p[j] >= 97 && p[j] <= 122 && p[j] != 32)
+				p[j] = p[j] - i;
+		}
+		for (int j = 0; j <= y; j++)
+		{
+			cout << p[j];
+		}
+
+
+
+	}
+
+	//the lower baazziii
+	void lower(int y)
+	{
+		char* up;
+		up = new char[size];
+		int i = 32;
+		for (int j = 0; j < y; j++)
+		{
+			up[j] = s[j];
+		}
+		for (int j = 0; j < y; j++)
+		{
+			if (up[j] >= 65 && up[j] <= 96 && up[j] != 32)
+				up[j] = up[j] + i;
+		}
+		cout << endl;
+		for (int j = 0; j < y; j++)
+		{
+			cout << up[j];
+		}
+
+	}
+
+	//extracting a char from an index 
+	astaad operator [](int y)
+	{
+		int input = 0;
+		cout << "plz enter an index you want extract a character from \n";
+		cin >> input;
+		if (input >= 0 && input <= y)
+		{
+			cout << "the character is : " << s[input] << endl;
+		}
+
+		return *this;
+	}
+
+	//extracting a sub-string 
+	void extractstring(int y)
+	{
+		char* ex;
+		ex = new char[y];
+		cout << "plz enter the starting index of your extraction \n  ";
+		int sss;
+		cin >> sss;
+		cout << "plz enter the ending index of your extraction \n  ";
+		int eee;
+		cin >> eee;
+		if (sss >= 0 && sss <= y)
+		{
+			if (eee > sss && eee < y)
+			{
+				for (int i = sss; i < eee; i++)
+				{
+					ex[i] = s[i];
+					cout << ex[i];
+
+				}
+			}
+		}
+
+
+	}
+
+	// extract index with the given char
+	void extractindex(int  y)
+	{
+	int c = 0;
+		int ccc = 0;
+		char subazi[200];
+		cout << "enter the sub-string you are finding bruh !! \n";
+		cin.ignore();
+		cin.get(subazi, 200);
+		int kadh = strlen(subazi);
+		for (int i = 0; i < kadh; i++)
+		{
+			cout << subazi[i]; 
+		}
+		cout << endl;
+		
+		if (kadh <= y)
+		{
+			for (int i = 0; i < y; i++)
+			{
+				if (s[i] == subazi[0])
+				{
+					ccc = i;
+					for (int j = 0; i < kadh; j++)
+					{
+						if (s[j] == subazi[j])
+						{
+							c = 1;
+							if (j == kadh - 1)
+							{
+								break; 
+							}
+						}
+						else
+						{
+							c = 0; 
+						}
+					}
+				}
+			
+			}
+		}
+		if (c == 1)
+		{
+			cout << " the starting index is : " << ccc << endl; 
+		}
+		
+
+
+
+
+
+
+
+
+		
+
+	}
+
+	//comparison 
+	astaad operator ==(int y)
+	{
+		int c = 0;
+		cout << endl << "enter the string you want to compare with our previous string \n";
+		char lol[200];
+		cin.ignore();
+		cin.getline(lol, 200);
+		int yoy = strlen(lol);
+		if (yoy!=y)
+		{
+			cout << "not equal \n ";
+		}
+		else
+		{
+			for (int i = 0; i < y; i++)
+			{
+				if (s[i] != lol[i])
+				{
+					cout << "not equal strings \n";
+					c++;
+					break;
+				}
+
+			}
+
+			if (c == 0)
+			{
+				cout << "equal string \n";
+			}
+		}
+
+		return *this; 
+	}
+
+	//concatenate bazi
+	void connectkrna(int y)
+	{
+		string select;
+		string haha;
+		int nohah;
+		cout << "enter the data type you want to connect i.e integer or string  \n"; 
+		cin >> select; 
+		if (select == "integer")
+		{
+			cout << "input the integer \n";
+			cin >> nohah;
+			for (int i = 0; i <= y; i++)
+			{
+				cout << s[i];
+			}
+			cout << " " << nohah << endl;
+		}
+		else
+		{
+			cout << "input the string \n";
+			cin >> haha;
+			for (int i = 0; i <= y; i++)
+			{
+				cout << s[i];
+			}
+			cout << " " << haha << endl;
+		}
+
+
+
+
+
+
+		
+	}
+
+	//pretend baazii
+	void pehleconnectkrna(int y)
+	{
+
+		string selection;
+		string hahapehle;
+		int nohaha;
+		cout << "enter the data type you want to connect i.e integer or string  \n";
+		cin >> selection;
+		if (selection == "integer")
+		{
+			cout << "input the integer \n";
+			cin >> nohaha;
+			cout << nohaha << " ";
+			for (int i = 0; i <= y; i++)
+			{
+				cout << s[i];
+			}
+
+		}
+		else
+		{
+			cout << "input the string \n";
+			cin >> hahapehle;
+			cout << hahapehle << " "; 
+			for (int i = 0; i <= y; i++)
+			{
+				cout << s[i];
+			}
+
+		}
+
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*SEPERATOR-
+----------------------------------------
+----------------------------------------
+----------------------------------------
+----------------------------------------
+----------------------------------------
+*/
+
+//QUESTION 3
+class romanbazi
+{
+	int input1;
+
+
+public:
+	//constructor 
+	romanbazi()
+	{
+		input1 = 0;
+
+	}
+
+	//setter
+	void set(int x)
+	{
+		input1 = x;
+
+	}
+	//getter
+	void get(int& x)
+	{
+		x = input1;
+	}
+
+	void converter(int value)
+	{
+		int m = 0, d = 0, c = 0, l = 0, x = 0, v = 0, I = 0;
+		int in;
+		in = value;
+
+		for (int i = 0; i < value; i++)
+		{
+			if (in >= 1000)
+			{
+				in = in - 1000;
+				m++;
+
+			}
+			else { break; }
+		}
+
+		for (int i = 0; i < value; i++)
+		{
+			if (in >= 500)
+			{
+				in = in - 500;
+				d++;
+
+			}
+			else { break; }
+		}
+
+
+		for (int i = 0; i < value; i++)
+		{
+			if (in >= 100)
+			{
+				in = in - 100;
+				c++;
+
+			}
+			else { break; }
+		}
+
+
+		for (int i = 0; i < value; i++)
+		{
+			if (in >= 50)
+			{
+				in = in - 50;
+				l++;
+
+			}
+			else { break; }
+		}
+
+
+		for (int i = 0; i < value; i++)
+		{
+			if (in >= 10)
+			{
+				in = in - 10;
+				x++;
+
+			}
+			else { break; }
+		}
+
+		for (int i = 0; i < value; i++)
+		{
+			if (in >= 5)
+			{
+				in = in - 5;
+				v++;
+
+			}
+			else { break; }
+		}
+
+
+		for (int i = 0; i < value; i++)
+		{
+			if (in >= 1)
+			{
+				in = in - 1;
+				I++;
+
+			}
+			else { break; }
+		}
+
+
+		if (m > 0)
+		{
+			for (int i = 0; i < m; i++)
+			{
+				cout << "M";
+			}
+		}
+
+		if (d > 0)
+		{
+			for (int i = 0; i < d; i++)
+			{
+				cout << "D";
+			}
+		}
+
+		if (c > 0)
+		{
+			for (int i = 0; i < c; i++)
+			{
+
+				cout << "C";
+			}
+		}
+
+		if (l > 0)
+		{
+			for (int i = 0; i < l; i++)
+			{
+				cout << "L";
+			}
+		}
+
+		if (x > 0)
+		{
+			for (int i = 0; i < x; i++)
+			{
+
+				cout << "X";
+			}
+		}
+
+		if (v > 0)
+		{
+			for (int i = 0; i < v; i++)
+			{
+				cout << "V";
+			}
+		}
+
+		if (I > 0)
+		{
+			for (int i = 0; i < I; i++)
+			{
+				cout << "I";
+			}
+
+		}
+
+
+
+
+
+
+	}
+
+	int operator +(romanbazi& r)
+	{
+		int sum = 0;
+		sum = input1 + r.input1;
+
+		return sum;
+	}
+
+	int operator -(romanbazi& r)
+	{
+		int sub = 0;
+		if (input1 > r.input1)
+		{
+			sub = input1 - r.input1;
+		}
+		else
+		{
+			sub = r.input1 - input1;
+		}
+
+		return sub;
+	}
+
+	int operator *(romanbazi& r)
+	{
+		int prod = 0;
+		prod = input1 * r.input1;
+
+		return prod;
+	}
+
+	int operator /(romanbazi& r)
+	{
+		int div = 0;
+		div = input1 / r.input1;
+
+		return div;
+	}
+
+	bool operator ==(const  romanbazi& r1)
+	{
+		if (input1 == r1.input1)
+		{
+
+			return 1;
+		}
+		else { return 0; }
+	}
+
+	bool operator !=(const  romanbazi& r1)
+	{
+		if (input1 != r1.input1)
+		{
+
+			return 1;
+		}
+		else { return 0; }
+	}
+
+	int operator ++ ()
+	{
+		++input1;
+		
+		return input1; 
+	}
+	int  operator -- ()
+	{
+		--input1;
+		
+		return input1;
+	}
+
+	int operator ++ (int)
+	{
+		input1++;
+		
+		return input1;
+	}
+
+	int operator -- (int)
+	{
+		input1--;
+		
+		return input1;
+	}
+
+
+
+
+
+
+
+	void output()
+	{
+		cout << "value in class is \n ";
+		cout << input1;
+		cout << endl;
+	}
+
+
+
+
+
+
+
+};
+
+
+int main()
+{
+
+	//int a=0, b=0, c=0;
+	// cout << "plz enter the values \n";
+	// cin >> a;
+	// cout << endl;
+	// cin >> b;
+	// cout << endl;
+	// cin >> c;
+	// cout << endl;
+
+	// VectorType U(a, b, c);
+
+	// cout << "plz enter the values \n";
+	// cin >> a;
+	// cout << endl;
+	// cin >> b;
+	// cout << endl;
+	// cin >> c;
+	// cout << endl;
+	// VectorType V(a,b,c);
+
+
+	// double p = (U * V);
+
+	// double l1 = U.lenvec();
+
+	// double l2 = V.lenvec();
+
+	// U.anglevec(V, l1, l2, p);
+
+	// U + V;
+
+	// U - V;
+
+	// ++U;
+	// U++;
+	// --U;
+	// U--;
+
+	// if (U == V)
+	// {
+	// }
+
+	// if (U != V)
+	// {
+
+	// }
+
+	// U = V;
+	// cout << "enter values for your object \n";
+	// cin >> U;
+	// cout << U;
+	// cout << "enter values for your object \n";
+	// cin >> V;
+	// cout << V;
+
+
+	// /*SEPERATOR-
+	// QUESTION 2
+ //----------------------------------------
+ //----------------------------------------
+ //----------------------------------------
+ //----------------------------------------
+ //----------------------------------------
+ //*/
+
+	//cout << "\t\t\t\t STRING SYSTEMS !!! \n\n\n";
+
+
+	//char pp[200];
+	//cout << "please enter your string \n";
+	//cin.ignore();
+	//cin.getline(pp, 200);
+
+
+	//astaad rr(pp, 200);
+	//int yy = rr.getsize();
+
+	//rr.upper(yy);
+	//rr.lower(yy);
+	//cout << endl;
+	//rr[yy]; 
+	//rr.extractstring(yy);
+	//cout << endl;
+	//rr.extractindex(yy);
+	//rr==(yy);
+	//rr.connectkrna(yy);
+	//rr.pehleconnectkrna(yy);
+
+
+
+
+
+
+
+
+	/*SEPERATOR-
+	 QUESTION 3
+----------------------------------------
+----------------------------------------
+----------------------------------------
+----------------------------------------
+----------------------------------------
+*/
+	romanbazi R;
+
+	int value = 0;
+	cout << "\t\t\t plz enter your decimal number for ROMAN operation \n";
+	int x;
+	cin >> x;
+	R.set(x);
+	R.get(x);
+	romanbazi R1;
+	cout << "\t\t\t plz enter your decimal number for ROMAN operation \n";
+	int y;
+	cin >> y;
+	R1.set(y);
+	R1.get(y);
+
+	cout << "ROMAN NUMERAL \n";
+	int sum = R + R1;
+	cout << "your sum in roman numerals is \n ";
+	R.converter(sum);
+	cout << endl;
+	cout << "your subtraction  in roman numerals is \n ";
+	int sub = R - R1;
+	R.converter(sub);
+	cout << endl;
+	cout << "your product  in roman numerals is \n ";
+	int prod = R * R1;
+	R.converter(prod);
+	cout << endl << "your divison in roman numerals is \n";
+	int div = R / R1;
+	R.converter(div);
+	cout << endl;
+	if (R == R1)
+	{
+
+		R.converter(x);
+		cout << "\t\t\t AND ";
+		R1.converter(y);
+		cout << "\t\t\t : ARE EQUAL";
+		cout << endl;
+	}
+
+
+	if (R != R1)
+	{
+
+		R.converter(x);
+		cout << "\t\t\t AND ";
+		R1.converter(y);
+		cout << "\t\t\t : ARE NOT EQUAL";
+		cout << endl;
+	}
+
+	cout << "your  pre increament    ";
+	 int lma = ++R;
+	 R.converter(lma);
+	 cout << endl;
+
+
+	 cout << "your  post increament    ";
+	int lmao = R++;
+	R.converter(lmao);
+	cout << endl;
+
+
+	cout << "your  pre deccreament    ";
+	int lmaoo = --R;
+	R.converter(lmaoo); 
+	cout << endl; 
+
+	cout << "your  post decreament    ";
+	int lmaooo = R--;
+	R.converter(lmaooo);
+	cout << endl; 
+
+	return 0;
+
+
+}
+
+
+
+
+

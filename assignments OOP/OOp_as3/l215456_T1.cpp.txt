@@ -1,0 +1,354 @@
+
+
+
+
+
+
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+//QUESTION 1
+class VectorType
+{
+private:
+	//necessary variables of pointers type
+
+	double* x; double* y; double* z;
+
+public:
+	//COMPARISON OPERATOR
+	friend bool operator ==(const VectorType& c, const VectorType& v);
+	//NOT EQUAL TO OPERATOR 
+	friend bool operator != (const VectorType& c, const VectorType& v);
+	//OUTPUT OPERATOR
+	friend ostream& operator<<(ostream& print, const VectorType& c);
+	//INPUT OPERATOR
+	friend istream& operator>>(istream& enter, const VectorType& c);
+
+	//default and overloaded constructor 
+
+	VectorType(double a = 0, double b = 0, double c = 0)
+	{
+		x = new double;
+		*x = a;
+		y = new double;
+		*y = b;
+		z = new double;
+		*z = c;
+	}
+
+	//copy constructor 
+	VectorType(const VectorType& V)
+	{
+		//cout << "copy constructor called \n"; 
+		x = V.x;
+		y = V.y;
+		z = V.z;
+	}
+
+	// setter  for value 
+	void setter(double  q, double  w, double  e)
+	{
+		//cout << *x << " " << *y << " " << *z << endl;
+
+		*x = q;
+		*y = w;
+		*z = e;
+
+	}
+	void getter(double& q, double& w, double& e)
+	{
+		//cout << *x << " " << *y << " " << *z << endl; 
+
+		q = *x;
+		w = *y;
+		e = *z;
+
+	}
+
+	//destructor 
+	/*~VectorType()
+	{
+		cout << "destructor called ";
+		delete x;
+		delete y;
+		delete z;
+
+		}*/
+
+		//overloaded assignment operator 
+	VectorType operator = (const VectorType& c)
+	{
+		x = c.x;
+		y = c.y;
+		z = c.z;
+		return *this;
+	}
+
+	// overloading * for dotprod 
+	double operator * (VectorType& c)
+	{
+		cout << *x << " " << *y << " " << *z << endl;
+		cout << *(c.x) << " " << *(c.y) << " " << *(c.z) << endl;
+		//cout <<* x << *y << *z << endl;
+
+
+		double prod;
+		prod = ((*x) * (*c.x)) + ((*y) * (*c.y)) + ((*z) * (*c.z));
+		cout << "/t/t/t YOUR dot product  IS " << prod << endl;
+		return prod;
+
+	}
+
+	//length of vectors
+	double lenvec()
+	{
+		double len;
+
+		len = sqrt((*x * *x) + (*y * *y) + (*z * *z));
+		cout << "\t\t\t YOUR LENGTH IS " << len << endl;
+		return len;
+
+
+	}
+
+	//angel between vectors
+	VectorType anglevec(VectorType& c, double l1, double l2, double p)
+	{
+
+		double ang;
+
+		ang = (p / (l1 * l2));
+		if (ang >= -1 && ang <= 1)
+
+		{
+			cout << "\t\t\t YOUR ANGLE IS " << acos(ang) << endl;
+		}
+		else { cout << "\t\t\t YOUR ANGLE IS " << "0" << endl; }
+		return *this;
+	}
+
+	//add and sub overloading 
+	VectorType operator + (VectorType& c)
+
+	{
+
+
+		cout << "the sum of both vectors is \n";
+		double l = 0, p = 0, j = 0;
+		l = *x + *c.x;
+		p = *y + *c.y;
+		j = *z + *c.z;
+		cout << l << "i" << " " << p << "j" << " " << j << "k" << endl;
+		return *this;
+	}
+
+	VectorType operator - (VectorType& c)
+	{
+		double l, p, j;
+		cout << "the subtraction of both vectors is \n";
+		l = *x - *c.x;
+		p = *y - *c.y;
+		j = *z - *c.z;
+		cout << l << "i" << " " << p << "j" << " " << j << "k" << endl;
+		return *this;
+	}
+
+	//pre  increament and decrement 
+	VectorType& operator ++()
+	{
+		cout << *x << " " << *y << " " << *z << endl;
+
+		cout << "pre increment called \n";
+
+		++(*x);
+
+		++(*y);
+		++(*z);
+		cout << *x << endl << *y << endl << *z << endl;
+		return *this;
+	}
+
+	VectorType operator --()
+	{
+		cout << *x << " " << *y << " " << *z << endl;
+
+		cout << "pre decrement called \n";
+		--(*x);
+		--(*y);
+		--(*z);
+		cout << *x << endl << *y << endl << *z << endl;
+		return *this;
+	}
+
+	//post increment and decrement 
+	VectorType operator ++(int)
+	{
+		cout << *x << " " << *y << " " << *z << endl;
+		cout << "post increment called \n";
+		(*x)++;
+		(*y)++;
+		(*z)++;
+		cout << *x << endl << *y << endl << *z << endl;
+		return *this;
+	}
+
+	VectorType operator --(int)
+	{
+		cout << *x << " " << *y << " " << *z << endl;
+		cout << "post decrement called \n";
+		(*x)--;
+		(*y)--;
+		(*z)--;
+		cout << *x << endl << *y << endl << *z << endl;
+		return *this;
+	}
+
+
+
+	void input(double& a, double& s, double& d)
+	{
+
+		cin >> a;
+
+		cout << endl;
+		cin >> s;
+
+		cout << endl;
+		cin >> d;
+
+		cout << endl;
+	}
+
+
+};
+
+bool operator == (const VectorType& c, const VectorType& v)
+
+{
+	if (*(c.x) == *(v.x))
+	{
+		if (*(c.y) == *(v.y))
+		{
+			if (*(c.z) == *(v.z))
+			{
+				cout << " EQUAL vectors !!!!\n";
+				return 1;
+			}
+		}
+	}
+	else {
+		cout << "NOT EQUAL vectors  \n";
+		return 0;
+	}
+}
+
+bool operator != (const VectorType& c, const VectorType& v)
+{
+	if (*(c.x) != *(v.x))
+	{
+		if (*(c.y) != *(v.y))
+		{
+			if (*(c.z) != *(v.z))
+			{
+				cout << "EXACTLY NOT EQUAL BRO !!!!\n";
+				return 1;
+			}
+		}
+	}
+	else {
+
+		return 0;
+	}
+
+}
+
+ostream& operator<<(ostream& print, const VectorType& c)
+{
+
+	print << "i : " << *(c.x) << " ";
+	print << " j : " << *(c.y) << " ";
+	print << " k : " << *(c.z) << " " << endl;
+	return print;
+}
+
+istream& operator >>(istream& enter, const VectorType& c)
+{
+
+	enter >> *(c.x);
+	enter >> *(c.y);
+	enter >> *(c.z);
+
+	return enter;
+}
+
+
+
+
+
+
+
+
+
+int main()
+{
+
+	int a = 0, b = 0, c = 0;
+	cout << "plz enter the values \n";
+	cin >> a;
+	cout << endl;
+	cin >> b;
+	cout << endl;
+	cin >> c;
+	cout << endl;
+
+	VectorType U(a, b, c);
+
+	cout << "plz enter the values \n";
+	cin >> a;
+	cout << endl;
+	cin >> b;
+	cout << endl;
+	cin >> c;
+	cout << endl;
+	VectorType V(a, b, c);
+
+
+	double p = (U * V);
+
+	double l1 = U.lenvec();
+
+	double l2 = V.lenvec();
+
+	U.anglevec(V, l1, l2, p);
+
+	U + V;
+
+	U - V;
+
+	++U;
+	U++;
+	--U;
+	U--;
+
+	if (U == V)
+	{
+	}
+
+	if (U != V)
+	{
+
+	}
+
+	U = V;
+	cout << "enter values for your object \n";
+	cin >> U;
+	cout << U;
+	cout << "enter values for your object \n";
+	cin >> V;
+	cout << V;
+
+	return 0;
+}

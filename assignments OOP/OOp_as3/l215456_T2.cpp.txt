@@ -1,0 +1,368 @@
+#include <iostream>
+using namespace std; 
+
+
+
+class astaad
+{
+
+	int size;
+	char* s;
+
+public:
+	astaad(char uu[], int kk)
+	{
+		size = kk;
+		s = new char[size];
+		/*cout << "input your string \n"; */
+		for (int i = 0; i < size; i++)
+		{
+			s[i] = uu[i];
+		}
+
+	}
+	//setter
+
+	void set(char* x, int z)
+	{
+
+		s = x;
+		size = z;
+	}
+	//getter
+
+	void get(char*& x, int& z)
+	{
+
+		x = s;
+		z = size;
+	}
+	//getting length of the char array
+
+	int getsize()
+	{
+
+		int y = 1;
+		y = strlen(s);
+
+
+		cout << "the length of your string is = " << y << endl;
+		return y;
+	}
+
+	//upper case function
+	void upper(int y)
+	{
+		char* p;
+		p = new char[y];
+		int  i = 32;
+		for (int j = 0; j <= y; j++)
+		{
+			p[j] = s[j];
+
+		}
+		for (int j = 0; j <= y; j++)
+		{
+			if (p[j] >= 97 && p[j] <= 122 && p[j] != 32)
+				p[j] = p[j] - i;
+		}
+		for (int j = 0; j <= y; j++)
+		{
+			cout << p[j];
+		}
+
+
+
+	}
+
+	//the lower baazziii
+	void lower(int y)
+	{
+		char* up;
+		up = new char[size];
+		int i = 32;
+		for (int j = 0; j < y; j++)
+		{
+			up[j] = s[j];
+		}
+		for (int j = 0; j < y; j++)
+		{
+			if (up[j] >= 65 && up[j] <= 96 && up[j] != 32)
+				up[j] = up[j] + i;
+		}
+		cout << endl;
+		for (int j = 0; j < y; j++)
+		{
+			cout << up[j];
+		}
+
+	}
+
+	//extracting a char from an index 
+	astaad operator [](int y)
+	{
+		int input = 0;
+		cout << "plz enter an index you want extract a character from \n";
+		cin >> input;
+		if (input >= 0 && input <= y)
+		{
+			cout << "the character is : " << s[input] << endl;
+		}
+
+		return *this;
+	}
+
+	//extracting a sub-string 
+	void extractstring(int y)
+	{
+		char* ex;
+		ex = new char[y];
+		cout << "plz enter the starting index of your extraction \n  ";
+		int sss;
+		cin >> sss;
+		cout << "plz enter the ending index of your extraction \n  ";
+		int eee;
+		cin >> eee;
+		if (sss >= 0 && sss <= y)
+		{
+			if (eee > sss && eee < y)
+			{
+				for (int i = sss; i < eee; i++)
+				{
+					ex[i] = s[i];
+					cout << ex[i];
+
+				}
+			}
+		}
+
+
+	}
+
+	// extract index with the given char
+	void extractindex(int  y)
+	{
+		int c = 0;
+		int ccc = 0;
+		char subazi[200];
+		cout << "enter the sub-string you are finding bruh !! \n";
+		cin.ignore();
+		cin.get(subazi, 200);
+		int kadh = strlen(subazi);
+		for (int i = 0; i < kadh; i++)
+		{
+			cout << subazi[i];
+		}
+		cout << endl;
+
+		if (kadh <= y)
+		{
+			for (int i = 0; i < y; i++)
+			{
+				if (s[i] == subazi[0])
+				{
+					ccc = i;
+					for (int j = 0; i < kadh; j++)
+					{
+						if (s[j] == subazi[j])
+						{
+							c = 1;
+							if (j == kadh - 1)
+							{
+								break;
+							}
+						}
+						else
+						{
+							c = 0;
+						}
+					}
+				}
+
+			}
+		}
+		if (c == 1)
+		{
+			cout << " the starting index is : " << ccc << endl;
+		}
+
+
+
+
+
+
+
+
+
+
+
+	}
+
+	//comparison 
+	astaad operator ==(int y)
+	{
+		int c = 0;
+		cout << endl << "enter the string you want to compare with our previous string \n";
+		char lol[200];
+		cin.ignore();
+		cin.getline(lol, 200);
+		int yoy = strlen(lol);
+		if (yoy != y)
+		{
+			cout << "not equal \n ";
+		}
+		else
+		{
+			for (int i = 0; i < y; i++)
+			{
+				if (s[i] != lol[i])
+				{
+					cout << "not equal strings \n";
+					c++;
+					break;
+				}
+
+			}
+
+			if (c == 0)
+			{
+				cout << "equal string \n";
+			}
+		}
+
+		return *this;
+	}
+
+	//concatenate bazi
+	void connectkrna(int y)
+	{
+		string select;
+		string haha;
+		int nohah;
+		cout << "enter the data type you want to connect i.e integer or string  \n";
+		cin >> select;
+		if (select == "integer")
+		{
+			cout << "input the integer \n";
+			cin >> nohah;
+			for (int i = 0; i <= y; i++)
+			{
+				cout << s[i];
+			}
+			cout << " " << nohah << endl;
+		}
+		else
+		{
+			cout << "input the string \n";
+			cin >> haha;
+			for (int i = 0; i <= y; i++)
+			{
+				cout << s[i];
+			}
+			cout << " " << haha << endl;
+		}
+
+
+
+
+
+
+
+	}
+
+	//pretend baazii
+	void pehleconnectkrna(int y)
+	{
+
+		string selection;
+		string hahapehle;
+		int nohaha;
+		cout << "enter the data type you want to connect i.e integer or string  \n";
+		cin >> selection;
+		if (selection == "integer")
+		{
+			cout << "input the integer \n";
+			cin >> nohaha;
+			cout << nohaha << " ";
+			for (int i = 0; i <= y; i++)
+			{
+				cout << s[i];
+			}
+
+		}
+		else
+		{
+			cout << "input the string \n";
+			cin >> hahapehle;
+			cout << hahapehle << " ";
+			for (int i = 0; i <= y; i++)
+			{
+				cout << s[i];
+			}
+
+		}
+
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main()
+{
+
+
+
+
+	cout << "\t\t\t\t STRING SYSTEMS !!! \n\n\n";
+
+
+	char pp[200];
+	cout << "please enter your string \n";
+	//cin.ignore();
+	cin.getline(pp, 200);
+
+
+	astaad rr(pp, 200);
+	int yy = rr.getsize();
+
+	rr.upper(yy);
+	rr.lower(yy);
+	cout << endl;
+	rr[yy];
+	rr.extractstring(yy);
+	cout << endl;
+	rr.extractindex(yy);
+	rr == (yy);
+	rr.connectkrna(yy);
+	rr.pehleconnectkrna(yy);
+
+
+	return 0;
+}

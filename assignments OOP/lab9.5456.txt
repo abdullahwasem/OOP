@@ -1,0 +1,372 @@
+//question 1 
+// part 1 
+
+
+#include <iostream>
+using namespace std; 
+
+class DM;
+class DB
+{
+	double inches;
+	double feets;
+
+public :
+	DB(double a, double b)
+	{
+		inches = a;
+		feets = b;
+
+
+	 }
+
+	friend void  converteradd(const DB& c, const DM& m);
+};
+
+class DM
+{
+	double meters;
+	double centi;
+
+public:
+	DM(double v, double x)
+	{
+		meters = v;
+		centi = x;
+
+
+	}
+	friend void  converteradd(const DB& c, const DM& m); 
+
+};
+
+
+void converteradd(const DB& c, const DM& m)
+{
+	double mixinches = 0;
+	double mixcenti = 0;
+	double mixmeters = 0; 
+	mixinches = c.feets * 12;
+	mixcenti = mixinches * 0.3937;
+	mixmeters = mixcenti / 100; 
+
+	cout << "your answer is  " << mixmeters << " meters , " << mixcenti << " cm"; 
+
+
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main()
+{
+	double mtof = 3.28;
+	double ctoi = 0.3937; 
+	double ftoi = 12; 
+	double mtoc = 100; 
+	double mtoi = 39.37; 
+
+	cout << "please enter the feets  \n"; 
+	double feetss = 0;
+	cin >> feetss; 
+	cout << "please enter the  inches \n";
+	double inchess = 0;
+	cin >> inchess;
+	DB cool( inchess , feetss);
+
+
+	cout << "please enter the meters  \n";
+	double met = 0;
+	cin >> met;
+	cout << "please enter the  centimeters\n";
+	double cen = 0;
+	cin >> cen;
+	DM notcool(met, cen);
+
+	converteradd(cool, notcool);
+
+
+}
+
+
+//part 2 
+
+
+#include <iostream>
+using namespace std;
+
+class Integer
+{
+	int* crazzi;
+	int size;
+
+public:
+	Integer(int s)
+	{
+		size = s;
+		crazzi = new int[size];
+		cout << "plz input your integers \n";
+		for (int i = 0; i < size; i++)
+		{
+			cin>>crazzi[i];
+		}
+
+	}
+
+	void largest()
+	{
+		int max = 0;
+		for (int i = 0; i < size; i++)
+		{
+			if (crazzi[i] > max)
+			{
+				max = crazzi[i];
+			}
+		}
+
+		cout << "largest integer is :" << max << endl;
+	}
+
+	void smallest()
+	{
+		int min = crazzi[0];
+		for (int i = 0; i < size; i++)
+		{
+			if (crazzi[i] < min)
+			{
+				min = crazzi[i];
+			}
+		}
+
+		cout << "smallest integer is :" << min << endl;
+
+	}
+
+	void repeated()
+	{
+		int rep = 0;
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+				if (crazzi[i] == crazzi[j])
+				{
+					rep++;
+				}
+			}
+			cout << crazzi[i] << " is " << "repeated : " << rep << " times" << endl;
+			rep = 0;
+		}
+	}
+
+	void sortkrnaaa()
+	{
+		int min = 0;
+
+		for (int i = 0; i < size; i++)
+		{
+			for (int j = 0; j < size; j++)
+			{
+
+				if (crazzi[i] < crazzi[j])
+				{
+					min = crazzi[j];
+					crazzi[j] = crazzi[i];
+					crazzi[i] = min;
+
+				}
+
+			}
+			
+		}
+
+		for (int i = 0; i < size; i++)
+		{
+			cout << crazzi[i] << " ";
+		}
+	}
+
+	~Integer()
+	{
+		delete[] crazzi;
+	}
+
+};
+
+
+
+
+
+
+int main()
+{
+
+	int sizee = 0;
+
+	cout << "input size bruh ! \n";
+	cin >> sizee;
+
+	
+
+	Integer i(sizee);
+	i.largest();
+	i.smallest();
+	i.repeated();
+	i.sortkrnaaa();
+
+	return 0;
+}
+
+
+
+
+//QUESTION 2
+
+#include <iostream>
+using namespace std; 
+
+class Polynomial
+{
+private:
+	int totalTerms;//Total terms in a Polynomial
+	int* coeff;//to save array of coefficients
+	int* exp; //to save array of exponents
+public:
+	Polynomial(int x, int cof[], int expp[])
+	{
+		cout << "consssssss called \n \n\n";
+		totalTerms = x;
+		coeff = new int[x];
+		for (int i = 0; i < x; i++)
+		{
+			coeff[i] = cof[i];
+		}
+
+		exp = new int[x];
+		for (int i = 0; i < x; i++)
+		{
+			exp[i] = expp[i];
+		}
+	}
+
+	friend ostream& operator << (ostream& printkr, Polynomial p )
+	{
+		
+		if (p.totalTerms== 3)
+		{
+			printkr << p.coeff[0] << "x^" << p.exp[0] << " + " << p.coeff[1] << "x^" << p.exp[1] <<" + " << p.coeff[2];
+		}
+		
+
+		else {
+			printkr << p. coeff[0] << "x^" << p.exp[0] << " + " << p.coeff[1] << "x^" << p.exp[1];
+		}
+
+		return printkr; 
+	}
+
+	void operator +(const Polynomial& p)
+	{
+		int u = 0, i = 0, o = 0;
+		int t = 
+		u = exp[0] + p.exp[0]; 
+
+		i = exp[1] + p.exp[1]; 
+		o = p.exp[2]; 
+
+	}
+
+
+	Polynomial operator ++ ()
+	{
+		
+		for (int i = 0; i < totalTerms; i++)
+		{
+			++coeff[i];
+			
+		}
+		return *this;
+	}
+
+	Polynomial operator ++ (int)
+	{
+
+		for (int i = 0; i < totalTerms; i++)
+		{
+			coeff[i]++;
+
+		}
+		return *this;
+	}
+
+	bool operator ! ()
+	{
+		if (totalTerms == 0)
+		{
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+
+	bool operator != (const Polynomial & p)
+	{
+		if (totalTerms != p.totalTerms)
+		{
+			return 1;
+		}
+		else {
+			return 0;
+		}
+	}
+
+};
+
+
+
+
+void main()
+{
+	int coeff_P1[] = { 1,2,5 }; //Coefficients for Polynomial P1
+	int exp_P1[] = { 4,2,0 }; //Exponents for Polynomial P1
+	int coeff_P2[] = { 4,3 }; //Coefficients for Polynomial P2
+	int exp_P2[] = { 6,2 }; //Exponents for Polynomial P2
+	Polynomial P1(3, coeff_P1, exp_P1);//Creates P1 with 3 terms (P1 = 1x^4 + 2x^2 + 5x^0 )
+	Polynomial P2(2, coeff_P2, exp_P2);//Creates P2 with 2 terms (P2 = 4x^6 + 3x^2)
+	cout << "P1 = " << P1 << endl; //Prints P1 = x^4+2x^2+5
+	cout << "P2 = " << P2 << endl; //Prints P2 = 4x^6+3x^2
+	if (!P1)
+		cout << "P1 is zero" << endl;/*if polynomial has only 1 term and its coeff and exp are zero. i.e. if p1 = 0.*/
+	if (P1 != P2)
+		cout << "P1 is Not Equal to P2" << endl;
+	cout << ++P1 << endl;//adds 1 in all the coefficient.
+	cout << P1 << endl;
+	cout << P1++ << endl; //adds 1 in all the coefficient.
+	cout << P1 << endl;
+	//Polynomial P3 = P1 + P2; //Adds P1 and P2 and saves result in P3.You may consume extra
+	////space for resultant Polynomial in Add function
+	//	cout << "P3 = " << P3 << endl; //Prints P3 = 4x^6+x^4+5x^2+5
+	//P3 = 2 + P1; //Assume P1 already has a constant term, add 2 in it.
+	//cout << "P3 = " << P3 << endl;
+
+	
+}
+
